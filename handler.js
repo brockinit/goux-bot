@@ -1,9 +1,6 @@
 'use strict';
 const request = require('request-promise-native');
-
-const BOT_ID = 'd4fb7af210bd3e1bfc39be2a99';
-const GROUP_ME_API = 'https://api.groupme.com/v3/bots/post';
-const GIPHY_API = 'https://api.giphy.com/v1/gifs/';
+const { GROUP_ME_API, GIPHY_API } = require('./config');
 
 async function getFailGif() {
   const giphy = {
@@ -27,10 +24,10 @@ async function getFailGif() {
   try {
     gifData = await request.get(giphyURL);
     let gouxReqOptions = {
-      uri: GROUP_ME_API,
+      uri: `${GROUP_ME_API.HOST}${GROUP_ME_API.BOT_MESSAGE}`,
       json: true,
       body: {
-        bot_id: BOT_ID,
+        bot_id: GROUP_ME_API.BOT_ID,
         text: JSON.parse(gifData).data.url,
       },
     };
@@ -50,10 +47,10 @@ async function getFailGif() {
 async function refsDontAffectGames() {
   try {
     let gouxReqOptions = {
-      uri: GROUP_ME_API,
+      uri: `${GROUP_ME_API.HOST}${GROUP_ME_API.BOT_MESSAGE}`,
       json: true,
       body: {
-        bot_id: BOT_ID,
+        bot_id: GROUP_ME_API.BOT_ID,
         text: 'rEfs DoNt AfFeCt GaMeS',
       },
     };
