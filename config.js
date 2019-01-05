@@ -8,6 +8,8 @@ module.exports = {
     SAL: '14954976',
     GEORGE: '10720104',
     DALTON: '15007302',
+    DEVIN: '10697165',
+    ALEX: '10720102',
   },
   MONGO_URL: process.env.MONGO_CONNECTION_STRING,
   MONGO_DBNAME: 'goux',
