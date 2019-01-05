@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-nodejs # NOTE: update this with your service name
+service: goux # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -41,9 +41,9 @@ provider:
 #            - "Ref" : "ServerlessDeploymentBucket"
 #            - "/*"
 
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  environment:
+    GROUP_ME_TOKEN: ${env:GROUP_ME_TOKEN}
+    MONGO_CONNECTION_STRING: ${env:MONGO_CONNECTION_STRING}
 
 # you can add packaging information here
 #package:
@@ -55,12 +55,16 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
+  webhookHandler:
     handler: handler.hello
     events:
       - http:
           path: webhooks/messages
           method: post
+  dailyMessageBackfill:
+    handler: functions/dailyMessageBackfill.handler
+    events:
+      - schedule: rate(24 hours)
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
@@ -82,10 +86,6 @@ functions:
 #      - cognitoUserPool:
 #          pool: MyUserPool
 #          trigger: PreSignUp
-
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
 
 # you can add CloudFormation resource templates here
 #resources:
