@@ -21,7 +21,7 @@ async function getMessagesSince() {
   // Find the newest message stored in the collection
   try {
     latestMessages = await collection.find().limit(1).sort(['created_at', -1]).toArray();
-    sinceId = '154672649562384802';
+    sinceId = latestMessages[0];
   } catch(err) {
     console.error('Error retrieving newest message from db', err.message);
     return client.close();
