@@ -9,6 +9,9 @@ module.exports = {
     GEORGE: '10720104',
     DALTON: '15007302',
   },
+  MONGO_URL: process.env.MONGO_CONNECTION_STRING,
+  MONGO_DBNAME: 'goux',
+  TABLE_NAME: 'goux_messages',
   GROUP_ME_API: {
     BOT_ID: 'd4fb7af210bd3e1bfc39be2a99',
     HOST: 'https://api.groupme.com/v3',
